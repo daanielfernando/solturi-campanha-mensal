@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Gerencial · Bateu Levou · Solturi</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Barlow', sans-serif; background: #f0ede8; color: #1a1a1a; min-height: 100vh; }
+.header { background: #002147; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.header-left h1 { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: 0.5px; }
+.header-left p { font-size: 11px; color: #7FB3D3; margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.badge-programa { font-size: 11px; font-weight: 700; color: #E8690A; letter-spacing: 2px; text-transform: uppercase; }
+.badge-solturi { background: #E8690A; color: #fff; font-size: 10px; font-weight: 600; padding: 4px 12px; border-radius: 99px; }
+.divider-orange { height: 3px; background: #E8690A; }
+.summary-bar { background: #fff; border-bottom: 1px solid #e0ddd8; padding: 0.875rem 2rem; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+.summary-item { text-align: center; }
+.summary-item .s-val { font-size: 20px; font-weight: 700; color: #002147; line-height: 1; }
+.summary-item .s-lbl { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.summary-div { width: 1px; height: 32px; background: #e0ddd8; }
+.legenda { margin-left: auto; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #666; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.content { padding: 1.5rem 2rem 3rem; }
+.coord-block { background: #fff; border-radius: 14px; overflow: hidden; margin-bottom: 1.25rem; border: 1px solid #e0ddd8; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.coord-header { background: #002147; padding: 0.875rem 1.25rem; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #E8690A; }
+.coord-avatar { width: 36px; height: 36px; border-radius: 50%; background: #E8690A; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.coord-nome { font-size: 14px; font-weight: 600; color: #fff; }
+.coord-sub { font-size: 11px; color: #7FB3D3; margin-top: 1px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+thead th { font-size: 11px; font-weight: 600; color: #888; text-align: left; padding: 8px 12px; border-bottom: 1px solid #f0ede8; background: #fafaf8; text-transform: uppercase; letter-spacing: 0.05em; }
+.meta-tag { font-size: 9px; font-weight: 400; color: #bbb; text-transform: none; letter-spacing: 0; margin-left: 4px; }
+tbody td { padding: 8px 12px; border-bottom: 0.5px solid #f4f2ee; vertical-align: middle; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: #fafaf8; }
+.rep-cell { display: flex; align-items: center; gap: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; background: #E8690A; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.bar-wrap { width: 100%; }
+.bar-bg { background: #e8e6e0; border-radius: 99px; height: 6px; overflow: hidden; margin-bottom: 4px; }
+.bar-fill { height: 6px; border-radius: 99px; }
+.bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: #666; }
+.geral-col { text-align: center; }
+.geral-pill { display: inline-flex; align-items: center; justify-content: center; padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; min-width: 60px; }
+.total-coord-row td { background: #f4f2ee; font-size: 12px; font-weight: 600; border-top: 1.5px solid #e0ddd8; }
+.footer { background: #002147; padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+.footer span { font-size: 11px; color: #7FB3D3; }
+.footer strong { color: #E8690A; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <h1>Dashboard Gerencial</h1>
+    <p>Atualizado em 16/07/2026 · Julho 2026 · 23 representantes</p>
+  </div>
+  <div class="header-right">
+    <span class="badge-programa">Bateu Levou</span>
+    <span class="badge-solturi">⚡ Solturi Energia</span>
+  </div>
+</div>
+<div class="divider-orange"></div>
+<div class="summary-bar">
+  <div class="summary-item"><div class="s-val">23</div><div class="s-lbl">Representantes</div></div>
+  <div class="summary-div"></div>
+  <div class="summary-item"><div class="s-val">5</div><div class="s-lbl">Coordenadores</div></div>
+  <div class="summary-div"></div>
+  <div class="summary-item"><div class="s-val" style="color:#A32D2D">3.3%</div><div class="s-lbl">Atingimento Geral</div></div>
+  <div class="summary-div"></div>
+  <div class="summary-item"><div class="s-val">R$ 266.175</div><div class="s-lbl">Total Vendas</div></div>
+  <div class="summary-div"></div>
+  <div class="summary-item"><div class="s-val">R$ 10.622</div><div class="s-lbl">Total Seguro</div></div>
+  <div class="summary-div"></div>
+  <div class="summary-item"><div class="s-val">R$ 0</div><div class="s-lbl">Total Adicionais</div></div>
+  <div class="legenda">
+    <div class="leg-item"><div class="leg-dot" style="background:#002147"></div>Meta batida</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#639922"></div>Acima 70%</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#E8690A"></div>40–70%</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#A32D2D"></div>Abaixo 40%</div>
+  </div>
+</div>
+<div class="content"><div class="coord-block">
+      <div class="coord-header">
+        <div class="coord-avatar">L</div>
+        <div><div class="coord-nome">Coordenador · Laercion</div><div class="coord-sub">7 representantes</div></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:180px">Representante</th>
+          <th>Vendas Totais <span class="meta-tag">meta R$ 250.000</span></th>
+          <th>Seguro e Limpeza <span class="meta-tag">meta R$ 8.500</span></th>
+          <th>Prod. Adicionais <span class="meta-tag">meta R$ 1.000</span></th>
+          <th style="width:90px">Geral</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><div class="rep-cell"><div class="avatar">EG</div><span>Edijane Gomes</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">E</div><span>Everson</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">I</div><span>Irineu</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">V</div><span>Vanderlei</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:7.3%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 18.350</span><span style="color:#A32D2D;font-weight:600">7.3%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:31.2%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 2.650</span><span style="color:#A32D2D;font-weight:600">31.2%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">12.8%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">N</div><span>Naiara</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">PO</div><span>Pedro Otavio</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">RG</div><span>Ricardo Germano</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr class="total-coord-row">
+      <td><strong>Total Laercion</strong></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:1.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 18.350</span><span style="color:#A32D2D;font-weight:700">1.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:4.5%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 2.650</span><span style="color:#A32D2D;font-weight:700">4.5%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D"><strong>1.8%</strong></div></td>
+    </tr></tbody>
+      </table>
+    </div><div class="coord-block">
+      <div class="coord-header">
+        <div class="coord-avatar">R</div>
+        <div><div class="coord-nome">Coordenador · Rodrigo</div><div class="coord-sub">6 representantes</div></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:180px">Representante</th>
+          <th>Vendas Totais <span class="meta-tag">meta R$ 250.000</span></th>
+          <th>Seguro e Limpeza <span class="meta-tag">meta R$ 8.500</span></th>
+          <th>Prod. Adicionais <span class="meta-tag">meta R$ 1.000</span></th>
+          <th style="width:90px">Geral</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><div class="rep-cell"><div class="avatar">DB</div><span>Dionei Beck</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:31.3%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 78.178</span><span style="color:#A32D2D;font-weight:600">31.3%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:24.5%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 2.080</span><span style="color:#A32D2D;font-weight:600">24.5%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">18.6%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">F</div><span>Fabio</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">GR</div><span>Gabriel Reina</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">GS</div><span>Gustavo Schunke</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:21.7%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 54.350</span><span style="color:#A32D2D;font-weight:600">21.7%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:26.9%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 2.290</span><span style="color:#A32D2D;font-weight:600">26.9%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">16.2%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">GT</div><span>Gustavo Tadra</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:19.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 47.484</span><span style="color:#A32D2D;font-weight:600">19.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:30.8%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 2.620</span><span style="color:#A32D2D;font-weight:600">30.8%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">16.6%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">J</div><span>Joel</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr class="total-coord-row">
+      <td><strong>Total Rodrigo</strong></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:12.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 180.012</span><span style="color:#A32D2D;font-weight:700">12.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:13.7%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 6.990</span><span style="color:#A32D2D;font-weight:700">13.7%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D"><strong>8.6%</strong></div></td>
+    </tr></tbody>
+      </table>
+    </div><div class="coord-block">
+      <div class="coord-header">
+        <div class="coord-avatar">L</div>
+        <div><div class="coord-nome">Coordenador · Lucas</div><div class="coord-sub">6 representantes</div></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:180px">Representante</th>
+          <th>Vendas Totais <span class="meta-tag">meta R$ 250.000</span></th>
+          <th>Seguro e Limpeza <span class="meta-tag">meta R$ 8.500</span></th>
+          <th>Prod. Adicionais <span class="meta-tag">meta R$ 1.000</span></th>
+          <th style="width:90px">Geral</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><div class="rep-cell"><div class="avatar">A</div><span>Alexandre</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">A</div><span>Alfredo</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">E</div><span>Eduarda</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">MA</div><span>Mario Augusto</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">P</div><span>Pablo</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">R</div><span>Rafael</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr class="total-coord-row">
+      <td><strong>Total Lucas</strong></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D"><strong>0.0%</strong></div></td>
+    </tr></tbody>
+      </table>
+    </div><div class="coord-block">
+      <div class="coord-header">
+        <div class="coord-avatar">C</div>
+        <div><div class="coord-nome">Coordenador · Cleiton</div><div class="coord-sub">3 representantes</div></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:180px">Representante</th>
+          <th>Vendas Totais <span class="meta-tag">meta R$ 250.000</span></th>
+          <th>Seguro e Limpeza <span class="meta-tag">meta R$ 8.500</span></th>
+          <th>Prod. Adicionais <span class="meta-tag">meta R$ 1.000</span></th>
+          <th style="width:90px">Geral</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><div class="rep-cell"><div class="avatar">F</div><span>Francisco</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">P</div><span>Paulo</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr>
+          <td><div class="rep-cell"><div class="avatar">T</div><span>Thomas</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">0.0%</div></td>
+        </tr><tr class="total-coord-row">
+      <td><strong>Total Cleiton</strong></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D"><strong>0.0%</strong></div></td>
+    </tr></tbody>
+      </table>
+    </div><div class="coord-block">
+      <div class="coord-header">
+        <div class="coord-avatar">D</div>
+        <div><div class="coord-nome">Coordenador · Daniel</div><div class="coord-sub">1 representante</div></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:180px">Representante</th>
+          <th>Vendas Totais <span class="meta-tag">meta R$ 250.000</span></th>
+          <th>Seguro e Limpeza <span class="meta-tag">meta R$ 8.500</span></th>
+          <th>Prod. Adicionais <span class="meta-tag">meta R$ 1.000</span></th>
+          <th style="width:90px">Geral</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><div class="rep-cell"><div class="avatar">D</div><span>Dyan</span></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:27.1%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 67.812</span><span style="color:#A32D2D;font-weight:600">27.1%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:11.5%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 982</span><span style="color:#A32D2D;font-weight:600">11.5%</span></div></div></td>
+          <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:600">0.0%</span></div></div></td>
+          <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D">12.9%</div></td>
+        </tr><tr class="total-coord-row">
+      <td><strong>Total Daniel</strong></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:27.1%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 67.812</span><span style="color:#A32D2D;font-weight:700">27.1%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:11.5%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 982</span><span style="color:#A32D2D;font-weight:700">11.5%</span></div></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:0.0%;background:#A32D2D"></div></div><div class="bar-labels"><span>R$ 0</span><span style="color:#A32D2D;font-weight:700">0.0%</span></div></div></td>
+      <td class="geral-col"><div class="geral-pill" style="background:#f4f2ee;color:#A32D2D;border:1.5px solid #A32D2D"><strong>12.9%</strong></div></td>
+    </tr></tbody>
+      </table>
+    </div></div>
+<div class="divider-orange"></div>
+<div class="footer">
+  <span>Solturi Energia Solar · Julho 2026</span>
+  <strong>Bateu Levou</strong>
+</div>
+</body>
+</html>
